@@ -17,6 +17,27 @@ class FacebookController extends Controller
    }
    public function facebookRedirect(Request $request)
    {
-    return Socialite::driver('facebook')->redirect();
-   }
-}
+      try {
+          $user = Socialite::driver('facebook')->stateless()->user();
+          $existingUser = User::where('facebook_id', $user->id)->first();
+   
+          if($existingUser){
+              Auth::login($existingUser);
+              return redirect('/dashboard');
+          }else{
+              $createUser = User::create([
+                  'name' => $user->name,
+                  'email' => $user->email,
+                  'facebook_id' => $user->id
+              ]);
+  
+              Auth::login($createUser);
+              return redirect('/dashboard');
+          }
+  
+      } catch (\Throwable $th) {
+        throw $th;
+     }
+  }
+ }
+ 
