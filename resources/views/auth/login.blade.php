@@ -2,8 +2,16 @@
     <x-authentication-card>
         <x-slot name="logo">
             <x-authentication-card-logo />
+            
         </x-slot>
-
+        <div class="flex justify-end">
+        @if (Route::has('register'))
+        <a href="{{ route('register') }}" class=" underline font-semibold text-gray-600 hover:text-gray-900 float-right">Register</a>
+        @endif
+        </div>
+        
+        
+       
         <x-validation-errors class="mb-4" />
 
         @if (session('status'))
@@ -39,11 +47,12 @@
                     </a>
                 @endif
 
-                <x-button class="ml-4">
+                
+            </div>
+            <x-button class="">
                     {{ __('Log in') }}
                 </x-button>
-            </div>
-            <div class="text-center bg-blue-700 text-white p-3 mt-2">
+            <div class="text-center bg-blue-800 rounded-md text-white p-3 mt-2">
                 <a href="{{route('facebookLogin')}}"><i class="mdi mdi-facebook mr-1 text-base"></i>Login With FaceBook</a>
             </div>
         </form>

@@ -17,6 +17,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'site_name' => env('SITE_NAME', 'Chat App'),
 
     /*
     |--------------------------------------------------------------------------
